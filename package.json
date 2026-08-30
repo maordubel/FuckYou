@@ -14,6 +14,7 @@
     "brand:kit": "node qa/brand-kit.mjs"
   },
   "dependencies": {
+    "@sentry/nextjs": "^10.72.0",
     "@supabase/supabase-js": "^2.45.4",
     "next": "^16.3.3",
     "react": "^19.2.8",

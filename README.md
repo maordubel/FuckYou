@@ -27,7 +27,13 @@ cp .env.example .env.local
 # NEXT_PUBLIC_SITE_URL=https://fuckyou.dubelteam.com   (optional; this is the default)
 ```
 
-## Database
+## Database — shared with TakeMeOut
+
+This runs on the **same Supabase project as TakeMeOut**. Everything it owns is
+prefixed `fy_`, so the two products never collide: `fy_entries`, `fy_votes`,
+`fy_reports`, `fy_audit`, `fy_admin`, `fy_admin_sessions`, `fy_admin_attempts`,
+and functions named `fy_*`. Dropping this product later is a matter of dropping
+that prefix.
 
 ```bash
 supabase db push     # or paste supabase/migrations/*.sql into the SQL Editor, in order
@@ -42,6 +48,10 @@ supabase db push     # or paste supabase/migrations/*.sql into the SQL Editor, i
   than raising, so the attempt row survives and the quota also applies to whoever
   is abusing it.
 * Moderation: 3 unique reports hide an entry.
+* Content guard: `fy_has_contact` refuses phone numbers, emails, links and
+  handles inside `fy_add`, so no client can put contact details on the wall.
+* Audit: a trigger on `fy_entries` records inserts, deletes and human edits —
+  on the table, so a manual `UPDATE` from the SQL editor is caught too.
 
 Both migrations are idempotent — verified by running the whole set twice against
 an empty database.
@@ -59,7 +69,61 @@ only — it colours the moment, it is not stored.
 | `/n/[id]/opengraph-image` | 1200×630 card, generated per name |
 | `/n/[id]/story` | 1080×1920 card for stories and WhatsApp status |
 | `/opengraph-image` | The site card |
+| `/hq` | The admin area. Not linked from anywhere and disallowed in robots.txt |
+| `/api/bot` | The daily seeding bot, secret-gated |
 | `/robots.txt`, `/sitemap.xml` | Generated |
+
+## HQ — the admin area
+
+`/hq` is unlinked and `noindex`. The password lives in Postgres as a bcrypt hash
+and is checked there; a correct login gets a session token the database issued,
+carried in an httpOnly cookie scoped to `/hq` and valid for 12 hours. Ten bad
+guesses in fifteen minutes locks the door, and the counter survives a failure
+because the function returns a value rather than raising.
+
+Inside: search, inline edit of name, reason and backing, hide, delete, and the
+recent-changes log. Every one of those is a `SECURITY DEFINER` function that
+checks the token on its first line.
+
+**Change the password** (do this once you are live):
+
+```sql
+select public.fy_admin_set_password('<session token>', 'hapoelTA14!', '<new password>');
+```
+
+Or reset it outright from the SQL editor:
+
+```sql
+update public.fy_admin set password_hash = crypt('<new password>', gen_salt('bf', 12)) where id = 1;
+delete from public.fy_admin_sessions;
+```
+
+## The bot
+
+`/api/bot` adds two to four names a day, weighted about half English with Greek,
+Hebrew, Bulgarian, Spanish and Russian behind it, each landing with one to six
+backings so the wall reads as a place people already use. It writes through the
+same `fy_add` and `fy_vote` as any visitor, so the duplicate merge, the content
+guard and the rate limits all still apply to it.
+
+Its whole vocabulary is `src/lib/bot/names.json` — archetypes and ordinary
+invented personal names. Edit that file to change what it says; nothing is
+generated at runtime.
+
+Vercel Cron calls it daily at 09:17 UTC using `CRON_SECRET`. To fire it by hand,
+set `BOT_SECRET` and call `/api/bot?key=…`.
+
+## Realtime, Turnstile, Sentry
+
+* **Realtime** — the wall subscribes to `fy_entries` and refreshes itself, so a
+  count climbs while you are looking at it. Migration 0003 adds the table to the
+  `supabase_realtime` publication.
+* **Turnstile** — inert until both `NEXT_PUBLIC_TURNSTILE_SITE_KEY` and
+  `TURNSTILE_SECRET_KEY` exist. The widget renders, the server action verifies,
+  and a Cloudflare outage fails open rather than taking the wall down.
+* **Sentry** — inert without `NEXT_PUBLIC_SENTRY_DSN`. Cookies, auth headers and
+  user objects are stripped before send; the wall is anonymous and stays that
+  way. Setting `SENTRY_ORG` additionally turns on source-map upload at build.
 
 ## Brand
 

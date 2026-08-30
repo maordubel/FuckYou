@@ -172,7 +172,9 @@
     "rate": "Slow down. Try again in a minute.",
     "notFound": "That one's gone.",
     "generic": "Something broke. Try again.",
-    "offline": "The wall is unavailable right now."
+    "offline": "The wall is unavailable right now.",
+    "contact": "No phone numbers, emails or links. This is a wall, not a doxx.",
+    "robot": "Prove you're not a bot and try again."
   },
   "footer": {
     "legal": "Every name here was put up by an anonymous visitor. This is comedy, not an indictment.",
@@ -200,5 +202,30 @@
     "leaves the dishes in the sink \"to soak\"",
     "books a meeting that could have been an email",
     "says \"I never got that\" and it's sitting in their inbox"
-  ]
+  ],
+  "hq": {
+    "title": "HQ",
+    "sub": "Not linked from anywhere. The password is checked in the database.",
+    "password": "Password",
+    "enter": "Get in",
+    "checking": "Checking…",
+    "denied": "No.",
+    "rate": "Too many tries. Wait fifteen minutes.",
+    "expired": "Session over. Log in again.",
+    "offline": "No database configured.",
+    "logout": "Log out",
+    "count": "{n} entries",
+    "search": "Search names",
+    "go": "Go",
+    "colName": "Name",
+    "colReason": "Reason",
+    "colVotes": "Backing",
+    "colFlags": "State",
+    "colDo": "Do",
+    "hidden": "Hidden",
+    "save": "Save",
+    "delete": "Delete",
+    "confirmDelete": "Really delete",
+    "audit": "Recent changes"
+  }
 }
