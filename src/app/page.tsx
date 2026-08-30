@@ -1,6 +1,5 @@
 import { Suspense } from 'react';
 import { AddForm } from '@/components/AddForm';
-import { AddSheet } from '@/components/AddSheet';
 import { Footer } from '@/components/Footer';
 import { SearchBar } from '@/components/SearchBar';
 import { SiteHead } from '@/components/SiteHead';
@@ -42,17 +41,13 @@ export default async function Home({ searchParams }: HomeProps) {
         <SiteHead />
 
         <div className="mt-6 lg:grid lg:grid-cols-2 lg:items-start lg:gap-9">
-          {/* Mobile keeps the form behind a thumb-zone sheet so the wall is the
-              page. Desktop shows both at once. */}
-          <section className="lg:hidden">
-            <AddSheet />
+          {/* The form is the first thing on every screen — no button in front
+              of it. Desktop puts the wall beside it instead of below. */}
+          <section>
+            <AddForm idPrefix="vent" />
           </section>
 
-          <section className="hidden lg:block">
-            <AddForm idPrefix="side" />
-          </section>
-
-          <main id="main" className="mt-8 lg:mt-0">
+          <main id="main" className="mt-10 lg:mt-0">
             <Wall
               entries={entries}
               backed={backed}

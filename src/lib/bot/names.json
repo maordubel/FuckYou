@@ -1,0 +1,60 @@
+{
+  "note": "The bot's vocabulary. Edit freely — nothing here is generated at runtime. Archetypes are the safest and usually the funniest; the personal names are ordinary invented ones rather than real public figures, because a bot the site itself runs is the site publishing, not a visitor venting.",
+  "weights": { "en": 52, "el": 13, "he": 13, "bg": 11, "es": 6, "ru": 5 },
+  "pools": {
+    "en": {
+      "archetypes": [
+        "The guy who reclines his seat fully",
+        "Whoever says \"circling back\"",
+        "The one who claps when the plane lands",
+        "My neighbour's leaf blower",
+        "Whoever invented the 8am standup",
+        "The man on speakerphone in the queue",
+        "Whoever booked the 5pm Friday meeting",
+        "The one who replies \"k\"",
+        "Whoever took the last coffee",
+        "The person filming at the concert",
+        "The guy who parks over the line",
+        "Whoever schedules meetings without an agenda",
+        "The one who says \"per my last email\"",
+        "The self-checkout voice",
+        "Whoever queue-jumped at boarding",
+        "The person who leaves voice notes at 1am",
+        "Whoever eats fish in the office",
+        "The landlord who \"will look into it\"",
+        "Whoever cancels twenty minutes before",
+        "The one who reads and never replies"
+      ],
+      "people": [
+        "Nathan Whitlock", "Carla Rennick", "Douglas Pryor", "Melissa Hoyt",
+        "Trevor Machin", "Bianca Osgood", "Gordon Sayle", "Priya Ramesh",
+        "Wesley Tarrant", "Danielle Crisp", "Marcus Beddow", "Nadia Salter",
+        "Owen Fairclough", "Rachel Lindo", "Colin Yarrow", "Sophie Marchetti"
+      ]
+    },
+    "el": {
+      "archetypes": ["Όποιος παρκάρει στη διάβαση", "Ο τύπος με το ηχείο στην παραλία", "Όποιος μιλάει στο τηλέφωνο στο λεωφορείο"],
+      "people": ["Γιώργος Παπαδάκης", "Ελένη Βλάχου", "Νίκος Σταματίου", "Δήμητρα Καλογήρου", "Θανάσης Μαυρίδης", "Κατερίνα Ζώη"]
+    },
+    "he": {
+      "archetypes": ["מי שחונה בכניסה", "הבחור עם הרמקול בחוף", "מי שעונה 'תכף' וחוזר מחר"],
+      "people": ["משה כהן", "יעל ברקוביץ", "איתי שרעבי", "נועה גולן", "דוד לוי", "שירה אבידן", "עומר פרץ", "טל מזרחי"]
+    },
+    "bg": {
+      "archetypes": ["Който паркира на тротоара", "Съседът с бормашината в неделя", "Който говори по телефона в асансьора"],
+      "people": ["Георги Иванов", "Мария Петрова", "Стоян Димитров", "Веселина Тодорова", "Николай Ангелов", "Радост Митева"]
+    },
+    "es": {
+      "archetypes": ["El que aparca en doble fila", "Quien pone música en el altavoz"],
+      "people": ["Javier Ordóñez", "Lucía Ferrán", "Álvaro Benegas", "Marta Quiroga", "Rubén Salcedo"]
+    },
+    "ru": {
+      "archetypes": ["Кто занял два места", "Сосед с перфоратором в воскресенье"],
+      "people": ["Дмитрий Петров", "Ольга Николаева", "Артём Ковалёв", "Светлана Гурьева", "Игорь Лебедев"]
+    }
+  },
+  "reasons": [
+    "Ruined my day", "Annoying AF", "Toxic", "Lied to me", "Ghosted me",
+    "Owes me money", "They're an idiot", "Just… fuck them", "Broke my heart"
+  ]
+}

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { addAction, lookupAction, voteAction } from '@/app/actions';
 import { flickPlusOne } from '@/components/MarkerMotion';
 import { Tape } from '@/components/Tape';
+import { Turnstile } from '@/components/Turnstile';
 import { reactWitness } from '@/components/Witness';
 import { list, t } from '@/lib/i18n';
 import { formatNumber } from '@/lib/text';
@@ -14,7 +15,7 @@ const NAME_MAX = 40;
 const REASON_MAX = 120;
 const LOOKUP_DEBOUNCE_MS = 350;
 const VIBE_ROTATE_MS = 4200;
-const KNOWN_ERRORS = ['short', 'long', 'reasonLong', 'rate', 'notFound', 'generic'];
+const KNOWN_ERRORS = ['short', 'long', 'reasonLong', 'rate', 'contact', 'robot', 'notFound', 'generic'];
 
 type Reason = { id: string; label: string };
 type Mood = { id: string; label: string };
@@ -101,7 +102,7 @@ export function AddForm({ idPrefix, onSent }: { idPrefix: string; onSent?: () =>
     const chosen = reasons.find((item: Reason) => item.id === reasonId);
     const reason = usingOther ? other.trim() : (chosen?.label ?? '');
 
-    const data = new FormData();
+    const data = new FormData(event.currentTarget);
     data.set('name', sent);
     data.set('reason', reason);
 
@@ -292,6 +293,8 @@ export function AddForm({ idPrefix, onSent }: { idPrefix: string; onSent?: () =>
           </button>
         ))}
       </div>
+
+      <Turnstile />
 
       <div ref={smashRef} className="fy-land relative mt-5 px-[22px] py-2" data-anim>
         <svg

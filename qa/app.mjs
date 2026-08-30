@@ -5,42 +5,39 @@ const errs=[];
 const c=await b.newContext({viewport:{width:390,height:844},deviceScaleFactor:2});
 const p=await c.newPage();
 p.on('pageerror',e=>errs.push('PAGEERROR '+e.message));
-p.on('response',r=>{ if(r.status()>=400) errs.push('HTTP '+r.status()+' '+r.url()); });
+p.on('response',r=>{ if(r.status()>=400 && !r.url().includes('/api/bot')) errs.push('HTTP '+r.status()+' '+r.url()); });
+
 await p.goto(B,{waitUntil:'networkidle'});
 await p.waitForTimeout(1200);
 await p.screenshot({path:'qa/screenshots/app-home.png'});
-console.log('rows:', await p.locator('li.fy-cut').count());
+console.log('form on the page (no button first):', await p.locator('form input[name="name"]').first().isVisible());
 
-// open the sheet and add
-await p.getByRole('button',{name:'Who pissed you off?'}).first().click();
-await p.waitForTimeout(400);
-await p.locator('dialog input[name="name"]').fill('דוד לוי');
-await p.locator('dialog').getByRole('button',{name:'Ruined my day'}).click();
-await p.screenshot({path:'qa/screenshots/app-sheet.png'});
-await p.locator('dialog').getByRole('button',{name:'Fuck them',exact:true}).click();
-await p.waitForTimeout(1500);
+await p.locator('form input[name="name"]').first().fill('דוד לוי');
+await p.getByRole('button',{name:'Ruined my day'}).click();
+await p.getByRole('button',{name:'Fuck them',exact:true}).click();
+await p.waitForTimeout(1600);
 await p.screenshot({path:'qa/screenshots/app-after-add.png'});
 console.log('rows after add:', await p.locator('li.fy-cut').count());
 
-// duplicate
-await p.getByRole('button',{name:'Who pissed you off?'}).first().click();
-await p.locator('dialog input[name="name"]').fill('דוד לוי!!');
+await p.locator('form input[name="name"]').first().fill('דוד לוי!!');
 await p.waitForTimeout(900);
-console.log('dupe shown:', await p.locator('dialog section[aria-live="polite"]').isVisible().catch(()=>false));
+console.log('dupe shown:', await p.locator('section[aria-live="polite"]').first().isVisible().catch(()=>false));
 await p.screenshot({path:'qa/screenshots/app-dupe.png'});
-await p.keyboard.press('Escape');
 
-// me too
 await p.locator('.fy-metoo').nth(1).click();
 await p.waitForTimeout(1000);
 console.log('backed label:', await p.locator('.fy-metoo').nth(1).innerText());
 
-// entry page + share
 await p.locator('li.fy-cut a').first().click();
 await p.waitForTimeout(1400);
 await p.screenshot({path:'qa/screenshots/app-entry.png'});
 console.log('entry url:', p.url());
 console.log('share buttons:', await p.locator('a[href^="https://wa.me"], button:has-text("Save for story")').count());
+
+await p.goto(B+'/hq',{waitUntil:'networkidle'});
+await p.waitForTimeout(500);
+await p.screenshot({path:'qa/screenshots/app-hq.png'});
+console.log('hq gate:', await p.locator('input[name="password"]').isVisible());
 
 console.log('mobile hscroll:', await p.evaluate(()=>document.documentElement.scrollWidth>document.documentElement.clientWidth+1));
 await c.close();

@@ -1,4 +1,5 @@
 import { EntryRow } from '@/components/EntryRow';
+import { LiveWall } from '@/components/LiveWall';
 import { t } from '@/lib/i18n';
 import { formatNumber } from '@/lib/text';
 import type { Entry, Stats } from '@/types/entry';
@@ -15,6 +16,7 @@ type Props = {
 export function Wall({ entries, backed, stats, ranked, emptyTitle, emptyBody }: Props) {
   return (
     <>
+      <LiveWall />
       <div className="flex items-baseline justify-between gap-2.5">
         <h2 className="fy-poster text-[clamp(1.75rem,7vw,2.5rem)] leading-[0.95] normal-case">
           {t('wall.title')}

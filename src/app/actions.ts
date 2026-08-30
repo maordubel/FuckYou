@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { addEntry, lookupEntry, reportEntry, voteEntry } from '@/lib/data';
+import { verifyTurnstile } from '@/lib/turnstile';
 import { getVoterId } from '@/lib/voter';
 import type { ActionResult, Entry } from '@/types/entry';
 
@@ -11,6 +12,9 @@ export async function addAction(
 ): Promise<ActionResult> {
   const voter = await getVoterId();
   if (!voter) return { ok: false, error: 'generic' };
+
+  const human = await verifyTurnstile(String(formData.get('cf-turnstile-response') ?? ''));
+  if (!human) return { ok: false, error: 'robot' };
 
   const name = String(formData.get('name') ?? '');
   const rawReason = String(formData.get('reason') ?? '').trim();
