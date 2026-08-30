@@ -63,7 +63,7 @@ export function AdminTable({ rows, audit, query }: { rows: AdminRow[]; audit: Au
                     name="name"
                     defaultValue={row.name}
                     dir="auto"
-                    maxLength={40}
+                    maxLength={70}
                     aria-label={t('hq.colName')}
                     className={`${CELL} fy-name w-full min-h-11 font-bold`}
                   />

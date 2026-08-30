@@ -25,7 +25,7 @@ function first(value: string | string[] | undefined): string {
 
 export default async function Home({ searchParams }: HomeProps) {
   const params = await searchParams;
-  const query = first(params.q).slice(0, 40);
+  const query = first(params.q).slice(0, 70);
   const sort: SortMode = first(params.tab) === 'new' ? 'new' : 'top';
   const voter = await getVoterId();
 

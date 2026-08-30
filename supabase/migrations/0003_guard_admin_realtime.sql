@@ -96,10 +96,11 @@ alter table public.fy_admin_sessions enable row level security;
 alter table public.fy_admin_attempts enable row level security;
 revoke all on public.fy_admin, public.fy_admin_sessions, public.fy_admin_attempts from anon, authenticated;
 
--- Seed the password. Change it later with:
---   select public.fy_admin_set_password('<current>', '<new>');
+-- Seed the admin row with a password nobody knows — a random string hashed and
+-- thrown away. No secret has ever lived in this repository. Set a real one from
+-- the SQL editor after running the migrations; see README, "Set the password".
 insert into public.fy_admin (id, password_hash)
-values (1, crypt('hapoelTA14!', gen_salt('bf', 12)))
+values (1, crypt(gen_random_uuid()::text || gen_random_uuid()::text, gen_salt('bf', 12)))
 on conflict (id) do nothing;
 
 /** True when the token is a live session. Every admin function calls this on

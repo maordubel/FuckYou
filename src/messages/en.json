@@ -30,7 +30,7 @@
     "fineA": "Anonymous. No account.",
     "fineB": "No one needs to know.",
     "witnessLabel": "A little face watching you",
-    "counter": "{n}/40"
+    "counter": "{n}/70"
   },
   "reasons": [
     {
@@ -170,7 +170,7 @@
   },
   "error": {
     "short": "Too short. Try harder.",
-    "long": "Too long. 40 characters max.",
+    "long": "Too long. 70 characters max.",
     "reasonLong": "That's a speech, not a reason. 120 max.",
     "rate": "Slow down. Try again in a minute.",
     "notFound": "That one's gone.",

@@ -74,12 +74,14 @@ begin
 end;
 $$;
 
--- Re-seed the password through a path that can see crypt(), in case 0003 wrote
--- a row with a hash that was never usable.
+-- Make sure the admin row exists, through a path that can see crypt(). The
+-- password it seeds is random and discarded; an existing row is left alone, so
+-- running this never disturbs a password already in use.
 do $$
 begin
   if not exists (select 1 from public.fy_admin where id = 1) then
-    insert into public.fy_admin (id, password_hash) values (1, crypt('hapoelTA14!', gen_salt('bf', 12)));
+    insert into public.fy_admin (id, password_hash)
+    values (1, crypt(gen_random_uuid()::text || gen_random_uuid()::text, gen_salt('bf', 12)));
   end if;
 end;
 $$;

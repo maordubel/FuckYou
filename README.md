@@ -104,10 +104,18 @@ checks the token on its first line.
 > right password. 0005 widens the pinned path to include `extensions` and clears
 > the failed-attempt lockout. Run it.
 
-**Change the password** (do this once you are live):
+**Set the password.** The migrations seed the admin row with a random password
+that is generated inside the database and immediately forgotten, so no secret is
+ever committed here. Set your own from the SQL editor before you use `/hq`:
 
 ```sql
-select public.fy_admin_set_password('<session token>', 'hapoelTA14!', '<new password>');
+update public.fy_admin set password_hash = crypt('<your password>', gen_salt('bf', 12)) where id = 1;
+```
+
+Once you are signed in you can change it without touching SQL:
+
+```sql
+select public.fy_admin_set_password('<session token>', '<current>', '<new password>');
 ```
 
 Or reset it outright from the SQL editor:

@@ -11,7 +11,7 @@ import { list, t } from '@/lib/i18n';
 import { formatNumber } from '@/lib/text';
 import type { ActionResult, Entry } from '@/types/entry';
 
-const NAME_MAX = 40;
+const NAME_MAX = 70;
 const REASON_MAX = 120;
 const LOOKUP_DEBOUNCE_MS = 350;
 const VIBE_ROTATE_MS = 4200;
@@ -182,7 +182,11 @@ export function AddForm({ idPrefix, onSent }: { idPrefix: string; onSent?: () =>
         </svg>
       </div>
 
-      <p className="fy-type mt-1 text-[11px] text-ink-70">
+      <p
+        className={`fy-type mt-1 text-[11px] ${
+          name.length > NAME_MAX - 10 ? 'text-pink-ink' : 'text-ink-70'
+        }`}
+      >
         {checking ? t('duplicate.checking') : t('vent.counter', { n: name.length })}
       </p>
 
