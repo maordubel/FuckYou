@@ -1,0 +1,105 @@
+{
+  "app": {
+    "title": "FUCK YOU",
+    "tagline": "The list everybody wanted and nobody had the guts to start.",
+    "description": "The FUCK YOU list. Add a name, search the list, and co-sign whoever ruined your day. No signup, no tracking, purely petty.",
+    "skipToContent": "Skip to content"
+  },
+  "hero": {
+    "kicker": "Public venting · No signup · Nobody puts your name on anything",
+    "stampLabel": "SIGNED",
+    "sub": "Someone ruined your day? Write the name. Let the world sign it with you.",
+    "disclaimer": "This site is a joke. No phone numbers, no addresses, no threats — just steam."
+  },
+  "form": {
+    "legend": "Who screwed you today?",
+    "nameLabel": "Name of the asshole",
+    "namePlaceholder": "A name, a nickname, or 'the guy in seat 14B'",
+    "reasonLabel": "What did they do? (optional)",
+    "reasonPlaceholder": "Keep it short. No crying.",
+    "submit": "Stamp them",
+    "submitting": "Stamping...",
+    "openSheet": "Add someone to the list",
+    "closeSheet": "Close",
+    "nameCounter": "{n}/40 characters",
+    "reasonCounter": "{n}/120 characters"
+  },
+  "stats": {
+    "people": "{n} on the list",
+    "rage": "{n} rage signatures",
+    "meter": "Rage level"
+  },
+  "tabs": {
+    "label": "Sort the list",
+    "top": "Most hated",
+    "new": "Freshest"
+  },
+  "search": {
+    "label": "Search the list",
+    "placeholder": "Check if they are already on here...",
+    "clear": "Clear search",
+    "results": "{n} results for \"{q}\"",
+    "resultsOne": "One result for \"{q}\"",
+    "empty": "Not on the list. Lucky them — go ahead and add them."
+  },
+  "entry": {
+    "votes": "{n} signed",
+    "vote": "Same here",
+    "voted": "Signed",
+    "voteAria": "Add your signature to {name}",
+    "rank": "Rank {n}",
+    "report": "Report",
+    "reported": "Reported",
+    "reportConfirm": "Sure?",
+    "reportAria": "Report {name} as abusive",
+    "reason": "Reason",
+    "added": "Added",
+    "podium": "Rage podium"
+  },
+  "result": {
+    "created": "Stamped. {name} is on the list.",
+    "voted": "Already there — your signature is on it now.",
+    "already": "You already signed this one. Once is enough.",
+    "reported": "Report received. We are looking at it."
+  },
+  "error": {
+    "short": "Too short. Try harder.",
+    "long": "Too long. 40 characters max.",
+    "reasonLong": "That is a speech, not a reason. 120 characters max.",
+    "rate": "Slow down. Breathe. Try again in a minute.",
+    "notFound": "That entry is gone.",
+    "generic": "Something broke. Try again.",
+    "offline": "The list is unavailable right now."
+  },
+  "empty": {
+    "title": "The list is empty",
+    "body": "Nobody on here. Suspicious. Be the first."
+  },
+  "footer": {
+    "legal": "Every name here was written by an anonymous visitor. This is comedy, not an indictment.",
+    "privacy": "No signup, no tracking, nothing to worry about."
+  },
+  "credit": {
+    "builtBy": "Built and designed by",
+    "engineered": "Engineered by",
+    "designedDev": "Design and development —",
+    "built": "Built by",
+    "developedBy": "Developed by",
+    "madeWithLove": "Built in a rage at",
+    "aria": "Dubel Team — {label} (opens in a new tab)"
+  },
+  "roasts": [
+    "world champion at killing a good mood",
+    "the only person who can be late to a meeting they scheduled",
+    "says \"two minutes\" and comes back in two years",
+    "takes speakerphone calls on public transport",
+    "stops dead in the middle of the sidewalk",
+    "replies to emails only to say \"thanks\"",
+    "takes the parking spot you waited half an hour for",
+    "explains your own job back to you",
+    "sends seven voice notes instead of one sentence",
+    "leaves the dishes in the sink \"to soak\"",
+    "books a meeting that could have been an email",
+    "says \"I never got that\" and it is sitting in their inbox"
+  ]
+}

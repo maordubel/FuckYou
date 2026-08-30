@@ -1,0 +1,122 @@
+[
+  {
+    "name": "320x568",
+    "horizontal": false,
+    "scrollWidth": 320,
+    "clientWidth": 320,
+    "wide": [],
+    "small": [
+      "A:Skip to content:1x1"
+    ]
+  },
+  {
+    "name": "360x800",
+    "horizontal": false,
+    "scrollWidth": 360,
+    "clientWidth": 360,
+    "wide": [],
+    "small": [
+      "A:Skip to content:1x1"
+    ]
+  },
+  {
+    "name": "375x667",
+    "horizontal": false,
+    "scrollWidth": 375,
+    "clientWidth": 375,
+    "wide": [],
+    "small": [
+      "A:Skip to content:1x1"
+    ]
+  },
+  {
+    "name": "390x844",
+    "horizontal": false,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "wide": [],
+    "small": [
+      "A:Skip to content:1x1"
+    ]
+  },
+  {
+    "name": "402x874",
+    "horizontal": false,
+    "scrollWidth": 402,
+    "clientWidth": 402,
+    "wide": [],
+    "small": [
+      "A:Skip to content:1x1"
+    ]
+  },
+  {
+    "name": "412x915",
+    "horizontal": false,
+    "scrollWidth": 412,
+    "clientWidth": 412,
+    "wide": [],
+    "small": [
+      "A:Skip to content:1x1"
+    ]
+  },
+  {
+    "name": "430x932",
+    "horizontal": false,
+    "scrollWidth": 430,
+    "clientWidth": 430,
+    "wide": [],
+    "small": [
+      "A:Skip to content:1x1"
+    ]
+  },
+  {
+    "name": "768x1024",
+    "horizontal": false,
+    "scrollWidth": 768,
+    "clientWidth": 768,
+    "wide": [],
+    "small": [
+      "A:Skip to content:1x1"
+    ]
+  },
+  {
+    "name": "1024x1366",
+    "horizontal": false,
+    "scrollWidth": 1024,
+    "clientWidth": 1024,
+    "wide": [],
+    "small": [
+      "A:Skip to content:1x1"
+    ]
+  },
+  {
+    "name": "1280x800",
+    "horizontal": false,
+    "scrollWidth": 1280,
+    "clientWidth": 1280,
+    "wide": [],
+    "small": [
+      "A:Skip to content:1x1"
+    ]
+  },
+  {
+    "name": "1440x900",
+    "horizontal": false,
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "wide": [],
+    "small": [
+      "A:Skip to content:1x1"
+    ]
+  },
+  {
+    "name": "1920x1080",
+    "horizontal": false,
+    "scrollWidth": 1920,
+    "clientWidth": 1920,
+    "wide": [],
+    "small": [
+      "A:Skip to content:1x1"
+    ]
+  }
+]

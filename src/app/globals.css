@@ -1,0 +1,177 @@
+@import 'tailwindcss';
+
+/* ============================================================
+   Fuck You — design tokens
+   Territory: brutalist protest-print (riot poster / rubber stamp)
+   Motif: the red rubber stamp + ledger hairlines + caution tape
+   ============================================================ */
+@theme {
+  /* palette */
+  --color-paper: #e9e2d2;
+  --color-paper-2: #ded5c2;
+  --color-ink: #101010;
+  --color-ink-70: #4a463c;
+  --color-tar: #17150f;
+  --color-tar-2: #211e16;
+  --color-blood: #e4340f;
+  --color-blood-ink: #b32409;
+  --color-acid: #c8ff00;
+
+  /* geometry — sharp, no soft corners anywhere */
+  --radius-none: 0px;
+  --radius-stamp: 2px;
+
+  /* motion */
+  --ease-slam: cubic-bezier(0.2, 1.4, 0.3, 1);
+  --duration-tap: 90ms;
+  --duration-slam: 220ms;
+
+  /* type */
+  --font-display: var(--font-karantina-latin), var(--font-karantina-he), 'Arial Narrow', sans-serif;
+  --font-body: var(--font-heebo-latin), var(--font-heebo-he), system-ui, sans-serif;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.55;
+    min-height: 100dvh;
+    /* signature motif: printed paper grain */
+    background-image:
+      radial-gradient(var(--color-paper-2) 1px, transparent 1px),
+      linear-gradient(180deg, var(--color-paper) 0%, var(--color-paper-2) 100%);
+    background-size: 4px 4px, 100% 100%;
+  }
+
+  ::selection {
+    background: var(--color-blood);
+    color: var(--color-paper);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-blood-ink);
+    outline-offset: 2px;
+  }
+
+  input,
+  textarea {
+    font-size: 1rem; /* never below 16px: prevents iOS zoom */
+  }
+}
+
+@layer components {
+  /* --- signature motif: the stamp --- */
+  .fy-stamp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    letter-spacing: 0.04em;
+    color: var(--color-blood-ink);
+    border: 3px solid var(--color-blood);
+    box-shadow: inset 0 0 0 1px var(--color-blood);
+    border-radius: var(--radius-stamp);
+    padding-block: 0.1em;
+    padding-inline: 0.45em;
+    transform: rotate(-6deg);
+    mix-blend-mode: multiply;
+    opacity: 0.92;
+  }
+
+  .fy-stamp-light {
+    color: var(--color-acid);
+    border-color: var(--color-acid);
+    box-shadow: inset 0 0 0 1px var(--color-acid);
+    mix-blend-mode: normal;
+    opacity: 1;
+  }
+
+  .fy-stamp-slam {
+    animation: fy-slam var(--duration-slam) var(--ease-slam) both;
+  }
+
+  /* --- ledger hairlines behind every list --- */
+  .fy-ledger {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 43px,
+      color-mix(in srgb, var(--color-ink) 12%, transparent) 43px,
+      color-mix(in srgb, var(--color-ink) 12%, transparent) 44px
+    );
+  }
+
+  /* --- caution tape band --- */
+  .fy-tape {
+    background-color: var(--color-ink);
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent 0 10px,
+      color-mix(in srgb, var(--color-acid) 22%, transparent) 10px 20px
+    );
+  }
+
+  /* --- hard brutalist block --- */
+  .fy-block {
+    border: 2px solid var(--color-ink);
+    box-shadow: 4px 4px 0 0 var(--color-ink);
+  }
+
+  .fy-block-sm {
+    border: 2px solid var(--color-ink);
+    box-shadow: 3px 3px 0 0 var(--color-ink);
+  }
+}
+
+@keyframes fy-slam {
+  0% {
+    transform: rotate(-16deg) scale(2.6);
+    opacity: 0;
+  }
+  70% {
+    transform: rotate(-4deg) scale(0.94);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(-6deg) scale(1);
+    opacity: 0.92;
+  }
+}
+
+@keyframes fy-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(4px);
+  }
+}
+
+.fy-shake {
+  animation: fy-shake 160ms linear 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
