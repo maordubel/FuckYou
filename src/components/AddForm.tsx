@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState, useEffect, useId, useRef, useState } from 'react';
+import { useId, useRef, useState, useTransition } from 'react';
 import { addAction } from '@/app/actions';
 import { Stamp } from '@/components/Stamp';
 import { t } from '@/lib/i18n';
@@ -16,7 +16,9 @@ function messageFor(result: ActionResult | null): { text: string; tone: 'ok' | '
     const key = KNOWN_ERRORS.includes(result.error) ? result.error : 'generic';
     return { text: t(`error.${key}`), tone: 'bad' };
   }
-  if (result.status === 'created') return { text: t('result.created', { name: result.name ?? '' }), tone: 'ok' };
+  if (result.status === 'created') {
+    return { text: t('result.created', { name: result.name ?? '' }), tone: 'ok' };
+  }
   if (result.status === 'signed') return { text: t('result.voted'), tone: 'ok' };
   return { text: t('result.already'), tone: 'ok' };
 }
@@ -26,23 +28,34 @@ export function AddForm({ idPrefix, onDone }: { idPrefix: string; onDone?: () =>
   const nameId = `${idPrefix}-name-${reactId}`;
   const reasonId = `${idPrefix}-reason-${reactId}`;
   const formRef = useRef<HTMLFormElement>(null);
-  const [state, formAction, pending] = useActionState(addAction, null);
+  const [pending, startTransition] = useTransition();
+  const [result, setResult] = useState<ActionResult | null>(null);
   const [name, setName] = useState('');
   const [reason, setReason] = useState('');
 
-  useEffect(() => {
-    if (state?.ok) {
-      setName('');
-      setReason('');
-      formRef.current?.reset();
-      onDone?.();
-    }
-  }, [state, onDone]);
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (pending) return;
 
-  const message = messageFor(state);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    startTransition(async () => {
+      const outcome = await addAction(null, formData);
+      setResult(outcome);
+      if (outcome.ok) {
+        form.reset();
+        setName('');
+        setReason('');
+        onDone?.();
+      }
+    });
+  }
+
+  const message = messageFor(result);
 
   return (
-    <form ref={formRef} action={formAction} className="flex flex-col gap-4">
+    <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-4">
       <h2 className="font-[family-name:var(--font-display)] text-4xl leading-none">
         {t('form.legend')}
       </h2>
@@ -80,7 +93,9 @@ export function AddForm({ idPrefix, onDone }: { idPrefix: string; onDone?: () =>
           placeholder={t('form.reasonPlaceholder')}
           className="w-full resize-none border-2 border-ink bg-paper px-3 py-2 text-base placeholder:text-ink-70"
         />
-        <p className="text-xs text-ink-70 tabular-nums">{t('form.reasonCounter', { n: reason.length })}</p>
+        <p className="text-xs text-ink-70 tabular-nums">
+          {t('form.reasonCounter', { n: reason.length })}
+        </p>
       </div>
 
       <button

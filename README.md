@@ -2,7 +2,7 @@
 
 The FUCK YOU list. Add a name, search the list, and co-sign whoever ruined your day.
 
-Next.js 15 (App Router) · TypeScript strict · Tailwind v4 tokens · Supabase (Postgres + RLS + RPC) · WCAG 2.2 AA · mobile-first.
+Next.js 16 (App Router) · TypeScript strict · Tailwind v4 tokens · Supabase (Postgres + RLS + RPC) · WCAG 2.2 AA · mobile-first.
 
 ## Run locally
 
@@ -41,10 +41,17 @@ The layout uses logical properties throughout, so flipping `direction` in `src/l
 to `rtl` and adding a second catalogue is all a translation needs.
 Hebrew webfonts stay in the stack (unpreloaded) so a name typed in Hebrew still renders.
 
+## Proxy
+
+`src/proxy.ts` (the Next 16 name for middleware) issues an anonymous, httpOnly
+`fy_voter` cookie on first visit. It identifies a browser for signature de-duplication
+and rate limiting — it is not tied to a person and carries nothing else.
+
 ## Checks
 
 ```bash
 npm run lint && npm run typecheck && npm run build
+npm audit --audit-level=high
 npm run qa:responsive   # viewport matrix -> qa/screenshots
 npm run qa:flows        # add, duplicate, search, vote, mobile sheet
 ```
