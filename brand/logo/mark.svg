@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="FUCK YOU mark">
+  <circle cx="64" cy="60" r="40" fill="none" stroke="#121110" stroke-width="10"/>
+  <path d="M43 44l17 17M60 44l-17 17M68 44l17 17M85 44l-17 17" stroke="#121110" stroke-width="9" stroke-linecap="round"/>
+  <path d="M45 76h38" stroke="#121110" stroke-width="10" stroke-linecap="round"/>
+  <path d="M64 76c0 12 8 16 14 10" fill="none" stroke="#121110" stroke-width="9" stroke-linecap="round"/>
+</svg>
