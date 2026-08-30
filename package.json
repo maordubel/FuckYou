@@ -9,7 +9,9 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "qa:responsive": "node qa/shots.mjs",
-    "qa:flows": "node qa/flows.mjs"
+    "qa:flows": "node qa/app.mjs",
+    "qa:a11y": "node qa/a11y.mjs",
+    "brand:kit": "node qa/brand-kit.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.4",

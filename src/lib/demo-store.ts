@@ -11,13 +11,12 @@ type DemoStore = {
 const globalRef = globalThis as unknown as { __fyDemo?: DemoStore };
 
 const SEED: Array<[string, string | null, number, number]> = [
-  ['The guy on the 7:40 train', 'Shut the doors in my face', 214, 9],
-  ['Whoever invented "we will get back to you"', null, 187, 8],
-  ['My upstairs neighbour', 'Moves furniture at 2am', 143, 6],
-  ['The self-checkout machine', 'Unexpected item in the bagging area', 96, 4],
-  ['Bluetooth speaker guy at the beach', null, 74, 3],
-  ['Whoever parked across two spaces', 'Two spaces. One car.', 51, 2],
-  ['The technician who said "between 8 and 4"', null, 33, 1],
+  ['The guy on the 7:40 train', 'Ruined my day', 214, 9],
+  ['Whoever says "we\'ll get back to you"', 'Lied to me', 187, 8],
+  ['משה כהן', 'Annoying AF', 143, 6],
+  ['My upstairs neighbour', 'Toxic', 96, 4],
+  ['The one who read it and said nothing', 'Ghosted me', 74, 3],
+  ['Whoever parked across two spaces', 'Just… fuck them', 51, 2],
 ];
 
 function createStore(): DemoStore {
@@ -55,6 +54,18 @@ export function demoList(sort: SortMode, query: string, limit: number): Entry[] 
     )
     .slice(0, limit)
     .map(toEntry);
+}
+
+export function demoLookup(name: string): Entry | null {
+  const key = nameKey(name);
+  if (key.length < 2) return null;
+  const row = store().rows.find((item) => item.nameKey === key && !item.hidden);
+  return row ? toEntry(row) : null;
+}
+
+export function demoGet(id: string): Entry | null {
+  const row = store().rows.find((item) => item.id === id && !item.hidden);
+  return row ? toEntry(row) : null;
 }
 
 export function demoStats() {

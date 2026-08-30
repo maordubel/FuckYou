@@ -28,3 +28,9 @@ export function t(key: string, vars?: Vars): string {
 export function roastList(): readonly string[] {
   return messages.roasts;
 }
+
+/** Read a list out of the catalogue — reasons, moods, rotating placeholders. */
+export function list<T>(key: string): T[] {
+  const value = resolve(key);
+  return Array.isArray(value) ? (value as T[]) : [];
+}

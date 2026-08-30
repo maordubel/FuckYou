@@ -11,8 +11,7 @@ export function SearchBar() {
   const pathname = usePathname();
   const params = useSearchParams();
   const inputId = useId();
-  const initial = params.get('q') ?? '';
-  const [value, setValue] = useState(initial);
+  const [value, setValue] = useState(params.get('q') ?? '');
 
   useEffect(() => {
     const current = params.get('q') ?? '';
@@ -22,37 +21,39 @@ export function SearchBar() {
       const next = new URLSearchParams(params.toString());
       if (value.trim() === '') next.delete('q');
       else next.set('q', value.trim());
-      router.replace(`${pathname}?${next.toString()}`, { scroll: false });
+      const query = next.toString();
+      router.replace(query === '' ? pathname : `${pathname}?${query}`, { scroll: false });
     }, DEBOUNCE_MS);
 
     return () => window.clearTimeout(timer);
   }, [value, params, pathname, router]);
 
   return (
-    <div className="flex flex-col gap-1.5">
-      <label htmlFor={inputId} className="text-sm font-bold">
-        {t('search.label')}
+    <div className="flex items-stretch gap-2">
+      <label htmlFor={inputId} className="sr-only">
+        {t('wall.searchLabel')}
       </label>
-      <div className="flex items-stretch gap-2">
-        <input
-          id={inputId}
-          type="search"
-          value={value}
-          onChange={(event) => setValue(event.target.value)}
-          placeholder={t('search.placeholder')}
-          className="min-h-12 w-full border-2 border-ink bg-paper px-3 py-2 text-base placeholder:text-ink-70"
-        />
-        {value !== '' ? (
-          <button
-            type="button"
-            onClick={() => setValue('')}
-            aria-label={t('search.clear')}
-            className="min-h-12 min-w-12 border-2 border-ink bg-ink px-3 text-paper"
-          >
-            ✕
-          </button>
-        ) : null}
-      </div>
+      <input
+        id={inputId}
+        type="search"
+        dir="auto"
+        value={value}
+        onChange={(event) => setValue(event.target.value)}
+        placeholder={t('wall.searchPlaceholder')}
+        className="fy-field !min-h-12 !px-3.5 !py-2.5 !text-base"
+      />
+      {value !== '' ? (
+        <button
+          type="button"
+          onClick={() => setValue('')}
+          aria-label={t('wall.searchClear')}
+          className="min-h-12 min-w-12 border-[2.5px] border-ink bg-ink px-3 text-paper"
+        >
+          <svg className="mx-auto h-3.5 w-3.5" aria-hidden="true">
+            <use href="#d-x" />
+          </svg>
+        </button>
+      ) : null}
     </div>
   );
 }

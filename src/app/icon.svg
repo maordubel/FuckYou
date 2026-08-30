@@ -1,9 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <rect width="64" height="64" fill="#e9e2d2"/>
-  <g transform="rotate(-6 32 32)">
-    <rect x="7" y="17" width="50" height="30" fill="none" stroke="#b32409" stroke-width="5"/>
-    <rect x="13" y="23" width="38" height="18" fill="none" stroke="#b32409" stroke-width="2"/>
-    <text x="32" y="37" font-family="Arial Black, Arial, sans-serif" font-size="15" font-weight="900"
-          text-anchor="middle" fill="#b32409">FY</text>
-  </g>
+  <rect width="64" height="64" fill="#d8f32b"/>
+  <circle cx="32" cy="30" r="19" fill="none" stroke="#121110" stroke-width="5"/>
+  <path d="M22 22l8 8M30 22l-8 8M34 22l8 8M42 22l-8 8" stroke="#121110" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M23 39h18" stroke="#121110" stroke-width="5" stroke-linecap="round"/>
+  <path d="M32 39c0 6 4 8 7 5" fill="none" stroke="#121110" stroke-width="4.5" stroke-linecap="round"/>
 </svg>

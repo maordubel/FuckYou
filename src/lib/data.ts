@@ -2,6 +2,8 @@ import { getSupabase } from '@/lib/supabase/server';
 import {
   demoAdd,
   demoList,
+  demoGet,
+  demoLookup,
   demoReport,
   demoSignedIds,
   demoStats,
@@ -55,6 +57,31 @@ export async function listEntries(
   const { data, error } = await request;
   if (error || !data) return [];
   return (data as EntryRow[]).map(toEntry);
+}
+
+export async function lookupEntry(name: string): Promise<Entry | null> {
+  if (name.trim().length < 2) return null;
+
+  const supabase = getSupabase();
+  if (!supabase) return demoLookup(name);
+
+  const { data, error } = await supabase.rpc('fy_lookup', { p_name: name });
+  if (error || !data) return null;
+  return toEntry(data as EntryRow);
+}
+
+export async function getEntry(id: string): Promise<Entry | null> {
+  const supabase = getSupabase();
+  if (!supabase) return demoGet(id);
+
+  const { data, error } = await supabase
+    .from('fy_entries')
+    .select('id,name,reason,votes,created_at')
+    .eq('id', id)
+    .maybeSingle();
+
+  if (error || !data) return null;
+  return toEntry(data as EntryRow);
 }
 
 export async function getStats(): Promise<Stats> {

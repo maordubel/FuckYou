@@ -3,13 +3,7 @@ import { t } from '@/lib/i18n';
 
 const DUBEL_URL = 'https://DubelTeam.com';
 
-type Variant =
-  | 'builtBy'
-  | 'engineered'
-  | 'designedDev'
-  | 'built'
-  | 'developedBy'
-  | 'madeWithLove';
+type Variant = 'builtBy' | 'engineered' | 'designedDev' | 'built' | 'developedBy' | 'madeWithLove';
 
 /**
  * Dubel Team footer credit — mandatory on every project.
@@ -34,10 +28,9 @@ export function BuiltByDubel({
       aria-label={t('credit.aria', { label })}
       className={[
         'inline-flex min-h-11 items-center gap-2 py-2 ps-1 pe-1',
-        'text-sm text-paper',
-        'transition-opacity hover:opacity-80',
+        'fy-type text-[11px] text-paper',
+        'transition-opacity hover:opacity-80 motion-reduce:transition-none',
         'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current',
-        'motion-reduce:transition-none',
         className,
       ].join(' ')}
     >

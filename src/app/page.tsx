@@ -2,12 +2,9 @@ import { Suspense } from 'react';
 import { AddForm } from '@/components/AddForm';
 import { AddSheet } from '@/components/AddSheet';
 import { Footer } from '@/components/Footer';
-import { Podium } from '@/components/Podium';
-import { RageMeter } from '@/components/RageMeter';
 import { SearchBar } from '@/components/SearchBar';
-import { Stamp } from '@/components/Stamp';
-import { Tabs } from '@/components/Tabs';
-import { Tape } from '@/components/Tape';
+import { SiteHead } from '@/components/SiteHead';
+import { SortTabs } from '@/components/SortTabs';
 import { Wall } from '@/components/Wall';
 import { getSignedIds, getStats, listEntries } from '@/lib/data';
 import { t } from '@/lib/i18n';
@@ -15,95 +12,77 @@ import { formatNumber } from '@/lib/text';
 import { getVoterId } from '@/lib/voter';
 import type { SortMode } from '@/types/entry';
 
-type HomePageProps = {
+type HomeProps = {
   searchParams: Promise<{ q?: string | string[]; tab?: string | string[] }>;
 };
 
-function firstValue(value: string | string[] | undefined): string {
+function first(value: string | string[] | undefined): string {
   if (Array.isArray(value)) return value[0] ?? '';
   return value ?? '';
 }
 
-export default async function HomePage({ searchParams }: HomePageProps) {
+export default async function Home({ searchParams }: HomeProps) {
   const params = await searchParams;
-  const query = firstValue(params.q).slice(0, 40);
-  const sort: SortMode = firstValue(params.tab) === 'new' ? 'new' : 'top';
+  const query = first(params.q).slice(0, 40);
+  const sort: SortMode = first(params.tab) === 'new' ? 'new' : 'top';
   const voter = await getVoterId();
 
-  const [entries, stats, signedIds] = await Promise.all([
+  const [entries, stats, backedIds] = await Promise.all([
     listEntries(sort, query),
     getStats(),
     voter === '' ? Promise.resolve<string[]>([]) : getSignedIds(voter),
   ]);
 
-  const signed = new Set(signedIds);
+  const backed = new Set(backedIds);
   const searching = query.trim() !== '';
-  const showPodium = !searching && sort === 'top' && entries.length >= 3;
-  const podium = showPodium ? entries.slice(0, 3) : [];
-  const rest = showPodium ? entries.slice(3) : entries;
 
   return (
     <div className="flex min-h-dvh flex-col">
-      <Tape text={t('hero.kicker')} />
+      <div className="mx-auto w-full max-w-[480px] px-[18px] pt-5 pb-8 lg:max-w-[940px] lg:px-10">
+        <SiteHead />
 
-      <header className="px-4 pt-6 sm:px-6 lg:px-10">
-        <div className="mx-auto max-w-6xl">
-          <div className="flex items-end gap-3 sm:gap-6">
-            <h1
-              className="max-w-[5ch] font-[family-name:var(--font-display)] text-[clamp(3.75rem,17vw,8rem)] leading-[0.78] sm:max-w-none"
-            >
-              {t('app.title')}
-            </h1>
-            <Stamp className="mb-2 shrink-0 text-xl sm:text-3xl lg:text-4xl">
-              {t('hero.stampLabel')}
-            </Stamp>
-          </div>
-          <p className="mt-3 max-w-prose text-base font-bold lg:text-lg">{t('app.tagline')}</p>
-          <p className="mt-1 max-w-prose text-sm text-ink-70">{t('hero.sub')}</p>
-        </div>
-      </header>
+        <div className="mt-6 lg:grid lg:grid-cols-2 lg:items-start lg:gap-9">
+          {/* Mobile keeps the form behind a thumb-zone sheet so the wall is the
+              page. Desktop shows both at once. */}
+          <section className="lg:hidden">
+            <AddSheet />
+          </section>
 
-      <div className="mx-auto mt-6 w-full max-w-6xl px-4 pb-32 sm:px-6 lg:grid lg:grid-cols-[340px_1fr] lg:gap-10 lg:px-10 lg:pb-10">
-        <aside className="flex min-w-0 flex-col gap-6 lg:sticky lg:top-6 lg:self-start">
-          <div className="hidden lg:block">
+          <section className="hidden lg:block">
             <AddForm idPrefix="side" />
-          </div>
-          <RageMeter stats={stats} />
-        </aside>
+          </section>
 
-        <main id="main" className="mt-6 flex min-w-0 flex-col gap-6 lg:mt-0">
-          <Suspense fallback={null}>
-            <SearchBar />
-          </Suspense>
+          <main id="main" className="mt-8 lg:mt-0">
+            <Wall
+              entries={entries}
+              backed={backed}
+              stats={stats}
+              ranked={!searching && sort === 'top'}
+              emptyTitle={searching ? t('wall.searchEmpty') : t('wall.empty')}
+              emptyBody={searching ? t('wall.sub') : t('wall.emptyBody')}
+            />
 
-          {searching ? (
-            <p className="text-sm font-bold" aria-live="polite">
-              {entries.length === 1
-                ? t('search.resultsOne', { q: query })
-                : t('search.results', { n: formatNumber(entries.length), q: query })}
-            </p>
-          ) : (
-            <Suspense fallback={null}>
-              <Tabs active={sort} />
-            </Suspense>
-          )}
+            <div className="mt-4 flex flex-col gap-3">
+              <Suspense fallback={null}>
+                <SearchBar />
+              </Suspense>
 
-          {showPodium ? <Podium entries={podium} signed={signed} /> : null}
-
-          <Wall
-            entries={rest}
-            signed={signed}
-            rankOffset={showPodium ? 3 : 0}
-            ranked={!searching && sort === 'top'}
-            emptyTitle={searching ? t('search.empty') : t('empty.title')}
-            emptyBody={searching ? t('hero.sub') : t('empty.body')}
-          />
-
-          <p className="text-xs text-ink-70">{t('hero.disclaimer')}</p>
-        </main>
+              {searching ? (
+                <p className="fy-type text-[11px] text-ink-70" aria-live="polite">
+                  {entries.length === 1
+                    ? t('wall.resultsOne', { q: query })
+                    : t('wall.results', { n: formatNumber(entries.length), q: query })}
+                </p>
+              ) : (
+                <Suspense fallback={null}>
+                  <SortTabs active={sort} />
+                </Suspense>
+              )}
+            </div>
+          </main>
+        </div>
       </div>
 
-      <AddSheet />
       <Footer />
     </div>
   );

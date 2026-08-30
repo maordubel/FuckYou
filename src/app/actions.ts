@@ -1,9 +1,9 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { addEntry, reportEntry, voteEntry } from '@/lib/data';
+import { addEntry, lookupEntry, reportEntry, voteEntry } from '@/lib/data';
 import { getVoterId } from '@/lib/voter';
-import type { ActionResult } from '@/types/entry';
+import type { ActionResult, Entry } from '@/types/entry';
 
 export async function addAction(
   _previous: ActionResult | null,
@@ -36,4 +36,9 @@ export async function reportAction(id: string): Promise<ActionResult> {
   const result = await reportEntry(id, voter);
   if (result.ok) revalidatePath('/');
   return result;
+}
+
+/** Live duplicate check while the name is being typed. Read-only, no side effects. */
+export async function lookupAction(name: string): Promise<Entry | null> {
+  return lookupEntry(name);
 }

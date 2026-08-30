@@ -1,83 +1,182 @@
 {
   "app": {
     "title": "FUCK YOU",
-    "tagline": "The list everybody wanted and nobody had the guts to start.",
-    "description": "The FUCK YOU list. Add a name, search the list, and co-sign whoever ruined your day. No signup, no tracking, purely petty.",
-    "skipToContent": "Skip to content"
+    "wordmarkA": "Fuck",
+    "wordmarkB": "You.",
+    "tagline": "Say it. Don't send it.",
+    "description": "Put a name up. Everyone who agrees backs it. Anonymous, no account, no one needs to know.",
+    "skipToContent": "Skip to content",
+    "domain": "fuckyou.dubelteam.com"
   },
-  "hero": {
-    "kicker": "Public venting · No signup · Nobody puts your name on anything",
-    "stampLabel": "SIGNED",
-    "sub": "Someone ruined your day? Write the name. Let the world sign it with you.",
-    "disclaimer": "This site is a joke. No phone numbers, no addresses, no threats — just steam."
+  "vent": {
+    "ask": "Who pissed you off?",
+    "sub": "Let it out. Anonymously.",
+    "nameLabel": "Their name, or a vibe",
+    "placeholder": "Name (or just a vibe…)",
+    "vibes": [
+      "Name (or just a vibe…)",
+      "The one who left you on read",
+      "Whoever scheduled 8am",
+      "That guy. You know the one.",
+      "The upstairs neighbour"
+    ],
+    "whyLabel": "Why are you fucking mad?",
+    "badLabel": "How bad is it?",
+    "other": "Other",
+    "otherLabel": "Say it in your own words",
+    "otherPlaceholder": "Keep it short. No crying.",
+    "submit": "Fuck them",
+    "submitting": "Sending…",
+    "fineA": "Anonymous. No account.",
+    "fineB": "No one needs to know.",
+    "witnessLabel": "A little face watching you",
+    "counter": "{n}/40"
   },
-  "form": {
-    "legend": "Who screwed you today?",
-    "nameLabel": "Name of the asshole",
-    "namePlaceholder": "A name, a nickname, or 'the guy in seat 14B'",
-    "reasonLabel": "What did they do? (optional)",
-    "reasonPlaceholder": "Keep it short. No crying.",
-    "submit": "Stamp them",
-    "submitting": "Stamping...",
-    "openSheet": "Add someone to the list",
-    "closeSheet": "Close",
-    "nameCounter": "{n}/40 characters",
-    "reasonCounter": "{n}/120 characters"
-  },
-  "stats": {
-    "people": "{n} on the list",
-    "rage": "{n} rage signatures",
-    "meter": "Rage level"
-  },
-  "tabs": {
-    "label": "Sort the list",
-    "top": "Most hated",
-    "new": "Freshest"
-  },
-  "search": {
-    "label": "Search the list",
-    "placeholder": "Check if they are already on here...",
-    "clear": "Clear search",
-    "results": "{n} results for \"{q}\"",
-    "resultsOne": "One result for \"{q}\"",
-    "empty": "Not on the list. Lucky them — go ahead and add them."
-  },
-  "entry": {
-    "votes": "{n} signed",
-    "vote": "Same here",
-    "voted": "Signed",
-    "voteAria": "Add your signature to {name}",
+  "reasons": [
+    {
+      "id": "heart",
+      "label": "Broke my heart"
+    },
+    {
+      "id": "idiot",
+      "label": "They're an idiot"
+    },
+    {
+      "id": "mad",
+      "label": "Annoying AF"
+    },
+    {
+      "id": "skull",
+      "label": "Ruined my day"
+    },
+    {
+      "id": "toxic",
+      "label": "Toxic"
+    },
+    {
+      "id": "snake",
+      "label": "Lied to me"
+    },
+    {
+      "id": "ghost",
+      "label": "Ghosted me"
+    },
+    {
+      "id": "money",
+      "label": "Owes me money"
+    },
+    {
+      "id": "bang",
+      "label": "Just… fuck them"
+    }
+  ],
+  "moods": [
+    {
+      "id": "m1",
+      "label": "A little"
+    },
+    {
+      "id": "m2",
+      "label": "Annoyed"
+    },
+    {
+      "id": "m3",
+      "label": "Pissed"
+    },
+    {
+      "id": "m4",
+      "label": "Furious"
+    },
+    {
+      "id": "m5",
+      "label": "Over it"
+    }
+  ],
+  "wall": {
+    "title": "The wall",
+    "sub": "Someone already said it. Say it with them.",
+    "tally": "{names} names · {backing} backing",
+    "metoo": "Me too",
+    "backed": "Backed",
+    "metooAria": "Back this up: {name}",
+    "open": "Open {name}",
     "rank": "Rank {n}",
+    "worst": "Worst today",
     "report": "Report",
     "reported": "Reported",
     "reportConfirm": "Sure?",
     "reportAria": "Report {name} as abusive",
-    "reason": "Reason",
-    "added": "Added",
-    "podium": "Rage podium"
+    "empty": "Nothing up yet",
+    "emptyBody": "Suspicious. Go first.",
+    "searchLabel": "Search the wall",
+    "searchPlaceholder": "Already up there?",
+    "searchClear": "Clear",
+    "results": "{n} results for \"{q}\"",
+    "resultsOne": "One result for \"{q}\"",
+    "searchEmpty": "Not up there. Lucky them.",
+    "sortTop": "Most backed",
+    "sortNew": "Just up",
+    "sortLabel": "Sort the wall"
+  },
+  "nav": {
+    "vent": "Vent",
+    "wall": "Wall",
+    "label": "Sections"
+  },
+  "duplicate": {
+    "title": "Already on the wall",
+    "cta": "Me too · {n}",
+    "checking": "Reading the wall…"
+  },
+  "entry": {
+    "backing": "{n}",
+    "backingLabel": "backing",
+    "backingOne": "person said it too",
+    "backingMany": "people said it too",
+    "since": "Up since",
+    "back": "Home",
+    "gone": "That one's gone",
+    "goneBody": "It was reported, or it was never here.",
+    "goneCta": "Back to the wall",
+    "backingMeta": "{n} people said it too"
+  },
+  "share": {
+    "title": "Send it",
+    "sub": "Say it out loud. Somewhere else.",
+    "whatsapp": "WhatsApp",
+    "story": "Save for story",
+    "storyBusy": "Making it…",
+    "native": "Share",
+    "copy": "Copy link",
+    "copied": "Copied",
+    "text": "{name} — {n} people already said it too. {url}",
+    "storyAlt": "A story card for {name}",
+    "cardLabel": "people said it too",
+    "cardLabelOne": "person said it too"
   },
   "result": {
-    "created": "Stamped. {name} is on the list.",
-    "voted": "Already there — your signature is on it now.",
-    "already": "You already signed this one. Once is enough.",
-    "reported": "Report received. We are looking at it."
+    "created": "%s is on the wall. You went first.",
+    "backed": [
+      "Backed. {n} of you now.",
+      "{n} people. That's a movement.",
+      "Signed. {n} and counting.",
+      "You're number {n}. Welcome."
+    ],
+    "already": "You already backed that one.",
+    "beaten": "Someone beat you to it."
   },
   "error": {
     "short": "Too short. Try harder.",
     "long": "Too long. 40 characters max.",
-    "reasonLong": "That is a speech, not a reason. 120 characters max.",
-    "rate": "Slow down. Breathe. Try again in a minute.",
-    "notFound": "That entry is gone.",
+    "reasonLong": "That's a speech, not a reason. 120 max.",
+    "rate": "Slow down. Try again in a minute.",
+    "notFound": "That one's gone.",
     "generic": "Something broke. Try again.",
-    "offline": "The list is unavailable right now."
-  },
-  "empty": {
-    "title": "The list is empty",
-    "body": "Nobody on here. Suspicious. Be the first."
+    "offline": "The wall is unavailable right now."
   },
   "footer": {
-    "legal": "Every name here was written by an anonymous visitor. This is comedy, not an indictment.",
-    "privacy": "No signup, no tracking, nothing to worry about."
+    "legal": "Every name here was put up by an anonymous visitor. This is comedy, not an indictment.",
+    "privacy": "No signup. No tracking. No one needs to know."
   },
   "credit": {
     "builtBy": "Built and designed by",
@@ -100,6 +199,6 @@
     "sends seven voice notes instead of one sentence",
     "leaves the dishes in the sink \"to soak\"",
     "books a meeting that could have been an email",
-    "says \"I never got that\" and it is sitting in their inbox"
+    "says \"I never got that\" and it's sitting in their inbox"
   ]
 }

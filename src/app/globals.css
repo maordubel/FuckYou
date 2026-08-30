@@ -1,175 +1,235 @@
 @import 'tailwindcss';
 
 /* ============================================================
-   Fuck You — design tokens
-   Territory: brutalist protest-print (riot poster / rubber stamp)
-   Motif: the red rubber stamp + ledger hairlines + caution tape
+   FUCK YOU — punk zine.
+   Photocopied paper, a highlighter swipe, brush black, one hot
+   pink. Every ornament is drawn by hand and arrives by being
+   drawn, never by fading in.
    ============================================================ */
 @theme {
-  /* palette */
-  --color-paper: #e9e2d2;
-  --color-paper-2: #ded5c2;
-  --color-ink: #101010;
-  --color-ink-70: #4a463c;
-  --color-tar: #17150f;
-  --color-tar-2: #211e16;
-  --color-blood: #e4340f;
-  --color-blood-ink: #b32409;
-  --color-acid: #c8ff00;
+  --color-paper: #efebe3;
+  --color-paper-2: #e5e0d6;
+  --color-ink: #121110;
+  --color-ink-70: #514d47;
+  --color-ink-40: #8a847b;
+  --color-lime: #d8f32b;
+  --color-pink: #f5216b;
+  --color-pink-ink: #c8004f;
 
-  /* geometry — sharp, no soft corners anywhere */
   --radius-none: 0px;
-  --radius-stamp: 2px;
 
-  /* motion */
-  --ease-slam: cubic-bezier(0.2, 1.4, 0.3, 1);
-  --duration-tap: 90ms;
-  --duration-slam: 220ms;
+  --ease-slam: cubic-bezier(0.2, 1.4, 0.35, 1);
+  --ease-pen: cubic-bezier(0.4, 0.05, 0.2, 1);
+  --duration-tap: 120ms;
+  --duration-draw: 620ms;
 
-  /* type */
-  --font-display: var(--font-karantina-latin), var(--font-karantina-he), 'Arial Narrow', sans-serif;
-  --font-body: var(--font-heebo-latin), var(--font-heebo-he), system-ui, sans-serif;
+  --font-poster-stack: var(--font-poster), 'Arial Narrow', sans-serif;
+  --font-marker-stack: var(--font-marker), 'Comic Sans MS', cursive;
+  --font-body-stack: var(--font-body), system-ui, sans-serif;
+  --font-type-stack: var(--font-type), ui-monospace, monospace;
+
+  /* user-entered names: any language, any direction */
+  --font-name:
+    var(--font-body), var(--font-noto-hebrew), var(--font-noto-arabic),
+    var(--font-noto-cyrillic), var(--font-noto-greek), var(--font-noto-devanagari),
+    var(--font-noto-thai), 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic',
+    'Noto Sans CJK JP', 'PingFang SC', 'Microsoft YaHei', 'Apple SD Gothic Neo',
+    'Malgun Gothic', sans-serif;
 }
 
 @layer base {
-  :root {
-    color-scheme: light;
-  }
+  :root { color-scheme: light; }
 
-  html {
-    -webkit-text-size-adjust: 100%;
-  }
+  html { -webkit-text-size-adjust: 100%; }
 
   body {
     background-color: var(--color-paper);
     color: var(--color-ink);
-    font-family: var(--font-body);
+    font-family: var(--font-body-stack);
     font-size: 1rem;
-    line-height: 1.55;
+    line-height: 1.45;
     min-height: 100dvh;
-    /* signature motif: printed paper grain */
-    background-image:
-      radial-gradient(var(--color-paper-2) 1px, transparent 1px),
-      linear-gradient(180deg, var(--color-paper) 0%, var(--color-paper-2) 100%);
-    background-size: 4px 4px, 100% 100%;
+    /* photocopy grain */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.09'/%3E%3C/svg%3E");
   }
 
-  ::selection {
-    background: var(--color-blood);
-    color: var(--color-paper);
-  }
+  ::selection { background: var(--color-lime); color: var(--color-ink); }
 
-  :focus-visible {
-    outline: 3px solid var(--color-blood-ink);
-    outline-offset: 2px;
-  }
+  :focus-visible { outline: 3px solid var(--color-pink); outline-offset: 3px; }
 
-  input,
-  textarea {
-    font-size: 1rem; /* never below 16px: prevents iOS zoom */
-  }
+  input, textarea { font-size: 1rem; } /* never below 16px: prevents iOS zoom */
 }
 
 @layer components {
-  /* --- signature motif: the stamp --- */
-  .fy-stamp {
-    display: inline-flex;
+  .fy-poster { font-family: var(--font-poster-stack); text-transform: uppercase; letter-spacing: 0.005em; }
+  .fy-marker { font-family: var(--font-marker-stack); }
+  .fy-type { font-family: var(--font-type-stack); letter-spacing: 0.06em; text-transform: uppercase; }
+
+  /* names arrive in any script and any direction */
+  .fy-name {
+    font-family: var(--font-name);
+    unicode-bidi: plaintext;
+    overflow-wrap: anywhere;
+  }
+
+  /* ── the marker arriving ─────────────────────────────── */
+  .fy-draw { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  .fy-draw.is-on { animation: fy-draw var(--duration-draw) var(--ease-pen) forwards; }
+
+  @keyframes fy-draw { to { stroke-dashoffset: 0; } }
+
+  /* highlighter swiped across, left to right */
+  .fy-swatch { clip-path: inset(0 100% 0 0); }
+  .is-on > .fy-swatch,
+  .fy-swatch.is-on { animation: fy-swipe 460ms cubic-bezier(0.35, 0.1, 0.2, 1) 60ms forwards; }
+
+  @keyframes fy-swipe { to { clip-path: inset(0 -2% 0 0); } }
+
+  /* brush tape slaps down, then its text shows up */
+  .fy-tape-bg { clip-path: inset(0 100% 0 0); }
+  .is-on .fy-tape-bg { animation: fy-swipe 320ms cubic-bezier(0.35, 0.1, 0.2, 1) forwards; }
+  .fy-tape-text { opacity: 0; }
+  .is-on .fy-tape-text { animation: fy-fade 240ms ease 200ms forwards; }
+
+  @keyframes fy-fade { to { opacity: 1; } }
+
+  /* things that land */
+  .fy-land { opacity: 0; }
+  .fy-land.is-on { animation: fy-land 420ms var(--ease-slam) forwards; }
+
+  @keyframes fy-land {
+    from { opacity: 0; transform: translateY(14px) scale(0.94) rotate(1.4deg); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .fy-stagger > * { opacity: 0; }
+  .fy-stagger.is-on > * { animation: fy-chip 300ms var(--ease-slam) forwards; }
+
+  @keyframes fy-chip {
+    from { opacity: 0; transform: translateY(8px) rotate(-1.5deg); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .fy-hit .fy-smash-bg { animation: fy-squash 260ms var(--ease-slam); }
+  .fy-hit .fy-sparks { animation: fy-burst 420ms ease-out; }
+
+  @keyframes fy-squash {
+    0% { transform: scale(1); }
+    40% { transform: scale(0.97, 0.9); }
+    100% { transform: scale(1); }
+  }
+
+  @keyframes fy-burst {
+    0% { transform: scale(0.82); opacity: 0.3; }
+    45% { transform: scale(1.12); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .fy-row-in { animation: fy-slam 420ms var(--ease-slam) both; }
+
+  @keyframes fy-slam {
+    from { transform: rotate(-8deg) scale(1.7); opacity: 0; }
+    60% { transform: rotate(1deg) scale(0.97); opacity: 1; }
+    to { transform: none; opacity: 1; }
+  }
+
+  .fy-bump { animation: fy-bump 300ms var(--ease-slam) both; }
+
+  @keyframes fy-bump {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.03) rotate(-1.2deg); }
+    100% { transform: scale(1); }
+  }
+
+  .fy-plusone {
+    position: absolute;
+    z-index: 60;
+    font-family: var(--font-marker-stack);
+    font-size: 1.25rem;
+    color: var(--color-pink-ink);
+    pointer-events: none;
+    animation: fy-fly 700ms cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+  }
+
+  @keyframes fy-fly {
+    0% { opacity: 0; transform: translate(0, 0) rotate(-6deg) scale(0.7); }
+    25% { opacity: 1; }
+    100% { opacity: 0; transform: translate(6px, -46px) rotate(9deg) scale(1.15); }
+  }
+
+  /* ── surfaces ────────────────────────────────────────── */
+  .fy-field {
+    width: 100%;
+    border: 2.5px solid var(--color-ink);
+    background: rgba(255, 255, 255, 0.55);
+    color: var(--color-ink);
+    padding: 15px 46px;
+    font-family: var(--font-name);
+    font-weight: 600;
+    font-size: 1.0625rem;
+    min-height: 56px;
+    unicode-bidi: plaintext;
+  }
+
+  .fy-field::placeholder {
+    font-family: var(--font-type-stack);
+    color: var(--color-ink-40);
+    text-transform: uppercase;
+    font-size: 0.9375rem;
+    font-weight: 400;
+  }
+
+  /* the lime block is decoration; the focus ring stays the ring */
+  .fy-field:focus { box-shadow: 4px 4px 0 0 var(--color-lime); }
+
+  .fy-chip {
+    border: 2px solid var(--color-ink);
+    background: transparent;
+    color: var(--color-ink);
+    padding: 9px 7px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1.1;
+    min-height: 52px;
+    display: flex;
     align-items: center;
-    justify-content: center;
-    font-family: var(--font-display);
-    letter-spacing: 0.04em;
-    color: var(--color-blood-ink);
-    border: 3px solid var(--color-blood);
-    box-shadow: inset 0 0 0 1px var(--color-blood);
-    border-radius: var(--radius-stamp);
-    padding-block: 0.1em;
-    padding-inline: 0.45em;
-    transform: rotate(-6deg);
-    mix-blend-mode: multiply;
-    opacity: 0.92;
+    gap: 7px;
+    text-align: start;
+    transition: transform var(--duration-tap) var(--ease-slam), background var(--duration-tap) ease;
   }
 
-  .fy-stamp-light {
-    color: var(--color-acid);
-    border-color: var(--color-acid);
-    box-shadow: inset 0 0 0 1px var(--color-acid);
-    mix-blend-mode: normal;
-    opacity: 1;
+  .fy-chip:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 0 var(--color-ink); }
+  .fy-chip[aria-pressed='true'] { background: var(--color-lime); box-shadow: 3px 3px 0 0 var(--color-ink); }
+
+  .fy-cut {
+    border: 2.5px solid var(--color-ink);
+    background: rgba(255, 255, 255, 0.5);
   }
 
-  .fy-stamp-slam {
-    animation: fy-slam var(--duration-slam) var(--ease-slam) both;
-  }
+  .fy-cut-lead { background: var(--color-lime); box-shadow: 5px 5px 0 0 var(--color-ink); }
 
-  /* --- ledger hairlines behind every list --- */
-  .fy-ledger {
-    background-image: repeating-linear-gradient(
-      to bottom,
-      transparent 0,
-      transparent 43px,
-      color-mix(in srgb, var(--color-ink) 12%, transparent) 43px,
-      color-mix(in srgb, var(--color-ink) 12%, transparent) 44px
-    );
-  }
-
-  /* --- caution tape band --- */
-  .fy-tape {
-    background-color: var(--color-ink);
-    background-image: repeating-linear-gradient(
-      45deg,
-      transparent 0 10px,
-      color-mix(in srgb, var(--color-acid) 22%, transparent) 10px 20px
-    );
-  }
-
-  /* --- hard brutalist block --- */
-  .fy-block {
+  .fy-metoo {
     border: 2px solid var(--color-ink);
-    box-shadow: 4px 4px 0 0 var(--color-ink);
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-marker-stack);
+    font-size: 0.8125rem;
+    padding: 8px 12px;
+    min-height: 44px;
+    white-space: nowrap;
+    transition: transform var(--duration-tap) var(--ease-slam);
   }
 
-  .fy-block-sm {
-    border: 2px solid var(--color-ink);
-    box-shadow: 3px 3px 0 0 var(--color-ink);
-  }
-}
-
-@keyframes fy-slam {
-  0% {
-    transform: rotate(-16deg) scale(2.6);
-    opacity: 0;
-  }
-  70% {
-    transform: rotate(-4deg) scale(0.94);
-    opacity: 1;
-  }
-  100% {
-    transform: rotate(-6deg) scale(1);
-    opacity: 0.92;
-  }
-}
-
-@keyframes fy-shake {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-4px);
-  }
-  75% {
-    transform: translateX(4px);
-  }
-}
-
-.fy-shake {
-  animation: fy-shake 160ms linear 2;
+  .fy-metoo:hover { transform: rotate(-2deg) scale(1.04); }
+  .fy-metoo[data-done='true'] { background: var(--color-pink); color: #fff; border-color: var(--color-pink-ink); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  .fy-draw { stroke-dashoffset: 0; }
+  .fy-swatch, .fy-tape-bg { clip-path: none; }
+  .fy-tape-text, .fy-land, .fy-stagger > * { opacity: 1; }
+
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
