@@ -35,8 +35,11 @@ export function AdminGate({ reason }: { reason?: 'expired' | 'offline' }) {
         </button>
 
         <p aria-live="polite" className="fy-marker min-h-6 text-[0.9375rem] text-pink-ink">
-          {state === 'denied' ? t('hq.denied') : state === 'rate' ? t('hq.rate') : ''}
-          {reason === 'expired' ? t('hq.expired') : reason === 'offline' ? t('hq.offline') : ''}
+          {state === 'denied' ? t('hq.denied') : ''}
+          {state === 'rate' ? t('hq.rate') : ''}
+          {state === 'offline' ? t('hq.offline') : ''}
+          {!state && reason === 'expired' ? t('hq.expired') : ''}
+          {!state && reason === 'offline' ? t('hq.offline') : ''}
         </p>
       </form>
     </main>

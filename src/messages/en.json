@@ -116,7 +116,10 @@
     "searchEmpty": "Not up there. Lucky them.",
     "sortTop": "Most backed",
     "sortNew": "Just up",
-    "sortLabel": "Sort the wall"
+    "sortLabel": "Sort the wall",
+    "more": "Show more",
+    "moreCount": "Show 12 more · {n} left",
+    "allShown": "That's everyone. So far."
   },
   "nav": {
     "vent": "Vent",
@@ -212,7 +215,7 @@
     "denied": "No.",
     "rate": "Too many tries. Wait fifteen minutes.",
     "expired": "Session over. Log in again.",
-    "offline": "No database configured.",
+    "offline": "No database configured. Check the Supabase keys.",
     "logout": "Log out",
     "count": "{n} entries",
     "search": "Search names",
@@ -227,5 +230,9 @@
     "delete": "Delete",
     "confirmDelete": "Really delete",
     "audit": "Recent changes"
+  },
+  "demo": {
+    "title": "Demo mode",
+    "body": "No database is connected, so nothing you add here is saved. Set the Supabase keys in the environment."
   }
 }

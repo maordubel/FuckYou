@@ -12,7 +12,11 @@ export async function loginAction(_prev: string | null, formData: FormData): Pro
   const result = await adminLogin(password);
 
   if (!result.ok || !result.token) {
-    return result.error === 'rate' ? 'rate' : 'denied';
+    // "offline" and "wrong password" look identical to a person otherwise, and
+    // that cost an afternoon once.
+    if (result.error === 'rate') return 'rate';
+    if (result.error === 'offline' || result.error === 'generic') return 'offline';
+    return 'denied';
   }
 
   const store = await cookies();

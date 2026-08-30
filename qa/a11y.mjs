@@ -33,9 +33,11 @@ for (let i = 0; i < 6; i++) {
 }
 console.log('tab order:'); stops.forEach(s => console.log('  ', s));
 
-const before = await p.locator('li.fy-cut').count();
-await p.locator('form input[name="name"]').last().fill('Keyboard Test');
+// the wall is capped at a page, so the proof is the status line, not the count
+const fresh = 'Keyboard Test ' + Date.now();
+await p.locator('form input[name="name"]').last().fill(fresh);
 await p.keyboard.press('Enter');
 await p.waitForTimeout(1600);
-console.log('keyboard submit worked:', (await p.locator('li.fy-cut').count()) > before);
+const said = await p.locator('form p[aria-live="polite"]').last().innerText();
+console.log('keyboard submit worked:', said.includes('is on the wall'), '·', said.trim());
 await b.close();

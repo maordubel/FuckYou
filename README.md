@@ -73,6 +73,19 @@ only — it colours the moment, it is not stored.
 | `/api/bot` | The daily seeding bot, secret-gated |
 | `/robots.txt`, `/sitemap.xml` | Generated |
 
+## A page that ends
+
+The wall shows 12 names and a **Show more** button that adds twelve at a time
+through a `?show=` parameter, so the page has a bottom no matter how many names
+the bot has added and the footer is always reachable on a phone.
+
+## Demo mode
+
+Without Supabase keys the app runs on an in-memory store that dies with the
+process — fine locally, disastrous to mistake for the real thing. So it says so:
+a pink banner under the masthead, and `/hq` answers "No database configured"
+rather than "wrong password".
+
 ## HQ — the admin area
 
 `/hq` is unlinked and `noindex`. The password lives in Postgres as a bcrypt hash
@@ -84,6 +97,12 @@ because the function returns a value rather than raising.
 Inside: search, inline edit of name, reason and backing, hide, delete, and the
 recent-changes log. Every one of those is a `SECURITY DEFINER` function that
 checks the token on its first line.
+
+> **Migration 0005 matters.** On Supabase, pgcrypto lives in the `extensions`
+> schema, and the admin functions originally pinned `search_path = public,
+> pg_temp` — so `crypt()` was invisible to them and every login failed with the
+> right password. 0005 widens the pinned path to include `extensions` and clears
+> the failed-attempt lockout. Run it.
 
 **Change the password** (do this once you are live):
 
