@@ -1,0 +1,6 @@
+User-Agent: *
+Allow: /
+Disallow: /hq
+Disallow: /api/
+
+Sitemap: https://fuckyou.dubelteam.com/sitemap.xml

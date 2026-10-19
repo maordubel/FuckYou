@@ -1,0 +1,38 @@
+{
+  "node": {
+    "606c1b7c8593b9bc7eda4219c2bec06484ed179df5": {
+      "workers": {
+        "app/page": {
+          "moduleId": 32989,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "addAction",
+      "filename": "src/app/actions.ts"
+    },
+    "4033cafbdf0417aa43435e6411c5790a170fcd0f64": {
+      "workers": {
+        "app/page": {
+          "moduleId": 32989,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "lookupAction",
+      "filename": "src/app/actions.ts"
+    },
+    "40e1288b6a163048083b2124af5bb01a20ff30ae32": {
+      "workers": {
+        "app/page": {
+          "moduleId": 32989,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "voteAction",
+      "filename": "src/app/actions.ts"
+    }
+  },
+  "edge": {}
+}
