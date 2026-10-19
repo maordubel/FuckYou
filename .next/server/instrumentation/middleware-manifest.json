@@ -1,0 +1,13 @@
+{
+  "sorted_middleware": [],
+  "middleware": {},
+  "instrumentation": {
+    "files": [
+      "server/edge/chunks/[root-of-the-server]__0abkhj4._.js",
+      "server/edge/chunks/[root-of-the-server]__1wil60a._.js",
+      "server/edge/chunks/turbopack-node_modules_next_dist_esm_build_templates_edge-wrapper_0z5b9l0.js"
+    ],
+    "name": "instrumentation"
+  },
+  "functions": {}
+}

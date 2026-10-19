@@ -1,0 +1,27 @@
+{
+  "node": {
+    "40e911b2962a1c0e990634bad35e05cfa0514e6ca4": {
+      "workers": {
+        "app/n/[id]/page": {
+          "moduleId": 75073,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "reportAction",
+      "filename": "src/app/actions.ts"
+    },
+    "40e1288b6a163048083b2124af5bb01a20ff30ae32": {
+      "workers": {
+        "app/n/[id]/page": {
+          "moduleId": 75073,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "voteAction",
+      "filename": "src/app/actions.ts"
+    }
+  },
+  "edge": {}
+}

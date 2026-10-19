@@ -1,0 +1,35 @@
+{
+  "app": {
+    "[project]/src/app/_not-found/page": [
+      "static/media/anton_latin_400_normal-s.p.2c_xnsc2yf3c2.woff2",
+      "static/media/permanent_marker_latin_400_normal-s.p.3mb8si3fxj6ni.woff2",
+      "static/media/archivo_latin_400_normal-s.p.3ulrwo0hu78l8.woff2",
+      "static/media/archivo_latin_600_normal-s.p.2xrlizciyxkaw.woff2",
+      "static/media/archivo_latin_700_normal-s.p.0xklgcivxid3p.woff2"
+    ],
+    "[project]/src/app/hq/page": [
+      "static/media/anton_latin_400_normal-s.p.2c_xnsc2yf3c2.woff2",
+      "static/media/permanent_marker_latin_400_normal-s.p.3mb8si3fxj6ni.woff2",
+      "static/media/archivo_latin_400_normal-s.p.3ulrwo0hu78l8.woff2",
+      "static/media/archivo_latin_600_normal-s.p.2xrlizciyxkaw.woff2",
+      "static/media/archivo_latin_700_normal-s.p.0xklgcivxid3p.woff2"
+    ],
+    "[project]/src/app/n/[id]/page": [
+      "static/media/anton_latin_400_normal-s.p.2c_xnsc2yf3c2.woff2",
+      "static/media/permanent_marker_latin_400_normal-s.p.3mb8si3fxj6ni.woff2",
+      "static/media/archivo_latin_400_normal-s.p.3ulrwo0hu78l8.woff2",
+      "static/media/archivo_latin_600_normal-s.p.2xrlizciyxkaw.woff2",
+      "static/media/archivo_latin_700_normal-s.p.0xklgcivxid3p.woff2"
+    ],
+    "[project]/src/app/page": [
+      "static/media/anton_latin_400_normal-s.p.2c_xnsc2yf3c2.woff2",
+      "static/media/permanent_marker_latin_400_normal-s.p.3mb8si3fxj6ni.woff2",
+      "static/media/archivo_latin_400_normal-s.p.3ulrwo0hu78l8.woff2",
+      "static/media/archivo_latin_600_normal-s.p.2xrlizciyxkaw.woff2",
+      "static/media/archivo_latin_700_normal-s.p.0xklgcivxid3p.woff2"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pages": {},
+  "pagesUsingSizeAdjust": false
+}

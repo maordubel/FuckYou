@@ -4,7 +4,7 @@ import nextTypescript from 'eslint-config-next/typescript';
 const eslintConfig = [
   ...nextCoreWebVitals,
   ...nextTypescript,
-  { ignores: ['.next/**', 'node_modules/**', 'qa/**'] },
+  { ignores: ['.next/**', 'node_modules/**', 'qa/**', 'ecosystem/**'] },
 ];
 
 export default eslintConfig;

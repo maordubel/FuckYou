@@ -1,0 +1,99 @@
+{
+  "node": {
+    "606c1b7c8593b9bc7eda4219c2bec06484ed179df5": {
+      "workers": {
+        "app/page": {
+          "moduleId": 32989,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "filename": "src/app/actions.ts",
+      "exportedName": "addAction"
+    },
+    "4033cafbdf0417aa43435e6411c5790a170fcd0f64": {
+      "workers": {
+        "app/page": {
+          "moduleId": 32989,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "filename": "src/app/actions.ts",
+      "exportedName": "lookupAction"
+    },
+    "40e1288b6a163048083b2124af5bb01a20ff30ae32": {
+      "workers": {
+        "app/n/[id]/page": {
+          "moduleId": 75073,
+          "async": false,
+          "codeHash": null
+        },
+        "app/page": {
+          "moduleId": 32989,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "filename": "src/app/actions.ts",
+      "exportedName": "voteAction"
+    },
+    "608058cb061f1fdd4e613f86c3d528abf2318f04a2": {
+      "workers": {
+        "app/hq/page": {
+          "moduleId": 55627,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "filename": "src/app/hq/actions.ts",
+      "exportedName": "loginAction"
+    },
+    "40d9d0f211e40350591a88ff0aed6176973c36ee34": {
+      "workers": {
+        "app/hq/page": {
+          "moduleId": 55627,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "filename": "src/app/hq/actions.ts",
+      "exportedName": "deleteAction"
+    },
+    "002a203cc9a3cf2b6a94572c30171962da42d955c5": {
+      "workers": {
+        "app/hq/page": {
+          "moduleId": 55627,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "filename": "src/app/hq/actions.ts",
+      "exportedName": "logoutAction"
+    },
+    "40e7b4559c49f7bc00c886fde546e7d8cfc706994f": {
+      "workers": {
+        "app/hq/page": {
+          "moduleId": 55627,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "filename": "src/app/hq/actions.ts",
+      "exportedName": "saveAction"
+    },
+    "40e911b2962a1c0e990634bad35e05cfa0514e6ca4": {
+      "workers": {
+        "app/n/[id]/page": {
+          "moduleId": 75073,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "filename": "src/app/actions.ts",
+      "exportedName": "reportAction"
+    }
+  },
+  "edge": {},
+  "encryptionKey": "NPqpHwHsO8nciD2HyjtvH+T/mQAF5uNvRQxt+LTSfzw="
+}
